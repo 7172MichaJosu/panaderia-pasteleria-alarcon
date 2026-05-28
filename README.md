@@ -77,3 +77,4 @@ WHATSAPP_BUSINESS_NUMBER="51900987261"
 ```
 
 El sistema usa links de WhatsApp para abrir el chat con el mensaje listo. Para envío automático real de imágenes como archivo se necesita WhatsApp Cloud API.
+Actualización de despliegue 2026-05-28
