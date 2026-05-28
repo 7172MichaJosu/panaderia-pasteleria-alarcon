@@ -30,6 +30,9 @@ importers:
         specifier: ^2.15.0
         version: 2.15.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
+      '@types/mssql':
+        specifier: ^12.3.0
+        version: 12.3.0(@azure/core-client@1.10.1)
       '@types/node':
         specifier: ^20.17.10
         version: 20.19.41
@@ -332,6 +335,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/mssql@12.3.0':
+    resolution: {integrity: sha512-+jy+AJtfuTDI5+nhh0hDNcir1p8P+pf+qsHXpUpYvg7EikxUUePBe+a+Kr6j/Xs89o4EbHlVzrh0HOxbqWM31Q==}
 
   '@types/node@20.19.41':
     resolution: {integrity: sha512-ECymXOukMnOoVkC2bb1Vc/w/836DXncOg5m8Xj1RH7xSHZJWNYY6Zh7EH477vcnD5egKNNfy2RpNOmuChhFPgQ==}
@@ -2525,6 +2531,15 @@ snapshots:
   '@types/d3-timer@3.0.2': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/mssql@12.3.0(@azure/core-client@1.10.1)':
+    dependencies:
+      '@types/node': 20.19.41
+      tarn: 3.0.2
+      tedious: 18.6.2(@azure/core-client@1.10.1)
+    transitivePeerDependencies:
+      - '@azure/core-client'
+      - supports-color
 
   '@types/node@20.19.41':
     dependencies:
