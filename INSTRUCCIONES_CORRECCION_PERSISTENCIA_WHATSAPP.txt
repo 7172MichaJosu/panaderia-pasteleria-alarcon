@@ -1,0 +1,65 @@
+CORRECCIÓN NUEVA - PERSISTENCIA, WHATSAPP, FONDOS E INTERFAZ
+
+1) PRODUCTOS QUE NO DESAPARECEN
+Ahora el modo demo guarda productos, pedidos y el historial en:
+
+data/demo-store.json
+
+Esto permite que al actualizar la página o cerrar y abrir el servidor local, los productos agregados sigan apareciendo.
+
+IMPORTANTE:
+- En local funciona guardando en archivo.
+- Para producción en Vercel, usa SQL Server remoto o almacenamiento externo, porque Vercel no guarda archivos subidos de forma permanente.
+
+2) IMÁGENES DE PRODUCTOS
+En el panel administrador ya no escribes rutas manualmente.
+Solo seleccionas una imagen JPG, PNG o WEBP desde PC, laptop, tablet o celular.
+Luego presionas Guardar producto.
+
+Las imágenes se guardan en:
+public/productos
+
+3) WHATSAPP
+El mensaje ya no manda el link de la imagen dentro del texto.
+Ahora el texto sale más limpio y profesional.
+
+Limitación técnica importante:
+Con enlaces normales de WhatsApp/wa.me no se puede adjuntar automáticamente un JPG como archivo.
+Por eso agregué el botón “Compartir JPG”. En celulares o navegadores compatibles abre el selector para compartir la imagen junto con el texto.
+Para automatizar 100% el envío de imágenes como archivo se necesita WhatsApp Cloud API.
+
+4) ESTADOS DEL PEDIDO
+En Pedidos y reservas, al seleccionar un estado:
+- Registrado
+- Confirmado
+- En preparación
+- En camino
+- Listo para recoger
+- Entregado
+- Cancelado
+
+El sistema guarda automáticamente el estado.
+Luego presionas Enviar WhatsApp y se abre el mensaje para el número del cliente.
+El aviso queda guardado en Historial de avisos enviados con fecha y hora.
+
+5) COMPROBANTE DE PAGO
+Los mensajes de pedido ahora incluyen una indicación para pedir captura de pantalla del pago cuando el método sea Yape, Plin o Transferencia.
+
+6) FONDOS PERSONALIZADOS
+Se agregaron como fondos las dos fotos enviadas:
+public/fondo-morochuca.jpg
+public/fondo-plaza-pampa-cangallo.jpg
+
+7) COMANDOS PARA EJECUTAR
+npm.cmd install
+copy .env.example .env.local
+npm.cmd run dev
+
+Abrir:
+http://localhost:3000
+
+Panel administrador:
+http://localhost:3000/admin
+
+Usuario: admin
+Contraseña: Admin123!

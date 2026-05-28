@@ -1,0 +1,35 @@
+INSTRUCCIONES RÁPIDAS
+
+1. Descomprime el ZIP.
+2. Abre la carpeta en Visual Studio Code.
+3. En la terminal escribe:
+
+   npm install
+   copy .env.example .env.local
+   npm run dev
+
+4. Abre en el navegador:
+
+   http://localhost:3000
+
+5. Panel administrador:
+
+   http://localhost:3000/admin
+
+   Usuario: admin
+   Contraseña: Admin123!
+
+6. Para SQL Server ejecuta:
+
+   sqlcmd -S localhost -E -i database/sqlserver/schema.sql
+   sqlcmd -S localhost -E -i database/sqlserver/seed.sql
+   sqlcmd -S localhost -E -i database/sqlserver/app-user.sql
+
+7. Luego cambia en .env.local:
+
+   USE_MOCK_DB="false"
+
+8. Reinicia:
+
+   CTRL + C
+   npm run dev

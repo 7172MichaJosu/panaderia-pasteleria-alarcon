@@ -1,0 +1,83 @@
+IF DB_ID('PanaderiaPasteleria') IS NULL
+BEGIN
+  CREATE DATABASE PanaderiaPasteleria;
+END
+GO
+
+USE PanaderiaPasteleria;
+GO
+
+IF OBJECT_ID('OrderNotifications', 'U') IS NOT NULL DROP TABLE OrderNotifications;
+IF OBJECT_ID('OrderItems', 'U') IS NOT NULL DROP TABLE OrderItems;
+IF OBJECT_ID('Orders', 'U') IS NOT NULL DROP TABLE Orders;
+IF OBJECT_ID('Products', 'U') IS NOT NULL DROP TABLE Products;
+IF OBJECT_ID('AdminUsers', 'U') IS NOT NULL DROP TABLE AdminUsers;
+GO
+
+CREATE TABLE AdminUsers (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  Username NVARCHAR(60) NOT NULL UNIQUE,
+  PasswordHash NVARCHAR(255) NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME()
+);
+GO
+
+CREATE TABLE Products (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  Name NVARCHAR(120) NOT NULL,
+  Description NVARCHAR(500) NULL,
+  Category NVARCHAR(80) NOT NULL,
+  Price DECIMAL(10,2) NOT NULL DEFAULT 0,
+  Stock INT NOT NULL DEFAULT 0,
+  ImageUrl NVARCHAR(MAX) NULL,
+  IsActive BIT NOT NULL DEFAULT 1,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME()
+);
+GO
+
+CREATE TABLE Orders (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  Code NVARCHAR(30) NOT NULL UNIQUE,
+  CustomerName NVARCHAR(160) NOT NULL,
+  Phone NVARCHAR(30) NOT NULL,
+  Address NVARCHAR(250) NOT NULL,
+  OrderType NVARCHAR(20) NOT NULL DEFAULT 'Pedido',
+  PaymentMethod NVARCHAR(50) NOT NULL DEFAULT 'Efectivo',
+  DeliveryDate DATETIME2 NULL,
+  Notes NVARCHAR(500) NULL,
+  Status NVARCHAR(30) NOT NULL DEFAULT 'Registrado',
+  Total DECIMAL(10,2) NOT NULL DEFAULT 0,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME()
+);
+GO
+
+CREATE TABLE OrderItems (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  OrderId INT NOT NULL,
+  ProductId INT NOT NULL,
+  ProductName NVARCHAR(120) NOT NULL,
+  ProductImageUrl NVARCHAR(MAX) NULL,
+  Quantity INT NOT NULL,
+  UnitPrice DECIMAL(10,2) NOT NULL,
+  Subtotal DECIMAL(10,2) NOT NULL,
+  CONSTRAINT FK_OrderItems_Orders FOREIGN KEY (OrderId) REFERENCES Orders(Id),
+  CONSTRAINT FK_OrderItems_Products FOREIGN KEY (ProductId) REFERENCES Products(Id)
+);
+GO
+
+CREATE TABLE OrderNotifications (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  OrderId INT NOT NULL,
+  Status NVARCHAR(30) NOT NULL,
+  Channel NVARCHAR(30) NOT NULL DEFAULT 'WhatsApp',
+  Message NVARCHAR(MAX) NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+  CONSTRAINT FK_OrderNotifications_Orders FOREIGN KEY (OrderId) REFERENCES Orders(Id)
+);
+GO
+
+CREATE INDEX IX_Products_Category ON Products(Category);
+CREATE INDEX IX_Orders_Status ON Orders(Status);
+CREATE INDEX IX_Orders_CreatedAt ON Orders(CreatedAt);
+CREATE INDEX IX_OrderNotifications_OrderId ON OrderNotifications(OrderId);
+GO

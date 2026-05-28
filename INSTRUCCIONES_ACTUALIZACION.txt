@@ -1,0 +1,62 @@
+ACTUALIZACIÓN DEL SISTEMA PANADERÍA Y PASTELERÍA
+
+Cambios incluidos:
+1. Diseño más profesional y llamativo.
+2. Formulario de nuevo producto con nombres claros: nombre, categoría, precio, stock, imagen y descripción.
+3. Soporte para imágenes JPG/PNG de productos.
+4. Se quitó el campo DNI del pedido público y del panel administrador.
+5. El pedido llega al WhatsApp del negocio: 900987261 con código de país Perú: 51900987261.
+6. En el panel administrador puedes cambiar estado: Registrado, Confirmado, En preparación, En camino, Listo para recoger, Entregado y Cancelado.
+7. Botón para avisar al cliente por WhatsApp según el estado del pedido.
+
+IMPORTANTE SOBRE IMÁGENES EN WHATSAPP:
+El enlace de WhatsApp puede enviar texto y links de imágenes. No puede adjuntar automáticamente archivos JPG desde el navegador.
+Para que el cliente o el negocio vea la imagen, el mensaje incluye el link de la imagen del producto.
+Para envío automático de imagen como archivo se necesita WhatsApp Cloud API.
+
+CÓMO AGREGAR IMÁGENES JPG:
+1. Entra a la carpeta public/productos.
+2. Copia ahí tus imágenes JPG.
+3. Usa nombres sin espacios, por ejemplo:
+   torta-chocolate.jpg
+   pan-frances.jpg
+   jugo-especial.jpg
+4. En el panel admin, en el campo Imagen escribe:
+   /productos/torta-chocolate.jpg
+
+EJECUTAR EN LOCAL:
+1. Abre la carpeta en Visual Studio Code.
+2. En terminal ejecuta:
+   npm install
+   copy .env.example .env.local
+   npm run dev
+3. Abre:
+   http://localhost:3000
+4. Panel admin:
+   http://localhost:3000/admin
+
+ACCESO ADMIN:
+Usuario: admin
+Contraseña: Admin123!
+
+SI USAS POWERSHELL Y SALE ERROR npm.ps1:
+Usa:
+   npm.cmd install
+   npm.cmd run dev
+
+SQL SERVER NUEVO:
+Ejecuta:
+   sqlcmd -S localhost -E -i database/sqlserver/schema.sql
+   sqlcmd -S localhost -E -i database/sqlserver/seed.sql
+   sqlcmd -S localhost -E -i database/sqlserver/app-user.sql
+
+SI YA TENÍAS LA BASE ANTIGUA:
+Ejecuta primero:
+   sqlcmd -S localhost -E -i database/sqlserver/migracion_quitar_dni_agregar_imagen_estado.sql
+
+Luego revisa .env.local y cambia:
+   USE_MOCK_DB="false"
+
+Reinicia:
+   CTRL + C
+   npm run dev

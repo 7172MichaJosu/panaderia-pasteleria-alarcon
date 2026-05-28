@@ -1,0 +1,49 @@
+ACTUALIZACION PROFESIONAL - PANADERIA PASTELERIA Y FUENTE DE SODA ALARCON
+
+CAMBIOS INCLUIDOS:
+1. Interfaz más profesional, moderna, llamativa y responsive.
+2. Nombre actualizado: Panadería Pastelería y fuente de soda Alarcón.
+3. Logo agregado en todo el sistema.
+4. Dirección agregada:
+   Jr. Túpac Amaru s/n, esquina de la Plaza Principal, Pampa Cangallo, Ayacucho, Perú.
+5. En nuevo producto ya no se escribe la ruta de imagen: ahora se selecciona JPG/PNG desde PC, laptop, tablet o celular.
+6. Se quitaron los ejemplos tipo Michael Quispe en el formulario público.
+7. Mensajes de WhatsApp más profesionales y con emojis.
+8. El panel permite seleccionar estado y enviar aviso por WhatsApp al cliente.
+9. Al enviar aviso se registra historial del aviso generado.
+10. Reportes con gráficos más llamativos: ventas por día, estado, tipo y stock.
+
+COMO EJECUTAR:
+1. Abre la carpeta en Visual Studio Code.
+2. En la terminal ejecuta:
+
+   npm.cmd install
+   copy .env.example .env.local
+   npm.cmd run dev
+
+3. Abre:
+
+   http://localhost:3000
+
+4. Panel administrador:
+
+   http://localhost:3000/admin
+
+5. Acceso administrador:
+
+   Usuario: admin
+   Contraseña: Admin123!
+
+SI USAS SQL SERVER Y YA TENIAS BASE ANTIGUA:
+Ejecuta esta migración:
+
+   sqlcmd -S localhost -E -i database/sqlserver/migracion_subir_imagenes_historial_whatsapp.sql
+
+Si usas SQL Express:
+
+   sqlcmd -S .\SQLEXPRESS -E -i database/sqlserver/migracion_subir_imagenes_historial_whatsapp.sql
+
+IMPORTANTE SOBRE WHATSAPP:
+El sistema abre WhatsApp con el mensaje listo. El historial se registra cuando se genera el mensaje.
+Con links normales de WhatsApp no se puede confirmar si la persona presionó el botón ENVIAR.
+Para envío automático real de imágenes como archivo se necesita WhatsApp Cloud API.
